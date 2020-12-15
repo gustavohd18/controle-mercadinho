@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'components/custom_dialog.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Controle do Mercadinho'),
     );
   }
 }
@@ -73,7 +75,17 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed:  (){
+                showDialog(context: context,
+                  builder: (BuildContext context){
+                  return CustomDialogBox(
+                    title: "Adicionar item",
+                    descriptions: "Hii all this is a custom dialog in flutter and  you will be use in your flutter applications",
+                    text: "Adicionar",
+                  );
+                  }
+                );
+              },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), 
