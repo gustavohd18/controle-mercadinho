@@ -80,14 +80,26 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                 maxValue: 100,
                 onChanged: (newValue) =>
                     setState(() => _currentValue = newValue)),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: FlatButton(
-                    onPressed: (){
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(widget.text,style: TextStyle(fontSize: 18),)),
-              ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                      Align(
+                        alignment: Alignment.bottomLeft,
+                        child: FlatButton(
+                        onPressed: (){
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("Cancelar",style: TextStyle(fontSize: 16),)),
+                        ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: FlatButton(
+                        onPressed: (){
+                          Navigator.of(context).pop();
+                        },
+                      child: Text("Adicionar",style: TextStyle(fontSize: 16),)),
+                      ),
+                    ],)
             ],
           ),
         ),
