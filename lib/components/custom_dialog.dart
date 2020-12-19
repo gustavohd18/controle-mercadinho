@@ -76,7 +76,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                Text("Quantidade: $_currentValue"),
               NumberPicker.integer(
                 initialValue: _currentValue,
-                minValue: 0,
+                minValue: 1,
                 maxValue: 100,
                 onChanged: (newValue) =>
                     setState(() => _currentValue = newValue)),

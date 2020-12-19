@@ -1,3 +1,4 @@
+import 'package:controle_do_mercadinho/components/itemTiles.dart';
 import 'package:flutter/material.dart';
 
 import 'components/custom_dialog.dart';
@@ -46,9 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
+              ItemTiles("1", "arroz", "4.50", "1"),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
