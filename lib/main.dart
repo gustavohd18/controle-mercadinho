@@ -1,4 +1,3 @@
-import 'package:controle_do_mercadinho/screen/splash.dart';
 import 'package:flutter/material.dart';
 
 import 'components/custom_dialog.dart';
@@ -11,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Splash(),
+      home: MyHomePage(),
     );
   }
 }
@@ -40,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
 
-        title: Text(widget.title),
+        title: Text("Controle de mercadinho"),
       ),
       body: Center(
        
