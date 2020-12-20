@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 class ItemList extends StatelessWidget {
   final Future<List<Item>> _future;
   final String text;
-
-  ItemList(this._future, this.text);
+  final Function() f;
+  ItemList(this._future, this.text, this.f);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +25,7 @@ class ItemList extends StatelessWidget {
                       item.name,
                       item.price.toString(),
                       item.amount.toString(),
+                      f
                       );
                 })
             : Center(

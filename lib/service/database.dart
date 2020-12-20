@@ -16,8 +16,7 @@ class ItemDatabase implements IDatabase {
 
   // make this a singleton class
   ItemDatabase._privateConstructor();
-  static final ItemDatabase instance =
-      ItemDatabase._privateConstructor();
+  static final ItemDatabase instance = ItemDatabase._privateConstructor();
 
   static Database _database;
   Future<Database> get database async {
@@ -68,6 +67,30 @@ class ItemDatabase implements IDatabase {
           price: maps[i]['price'],
           amount: maps[i]['amount']);
     });
+  }
+
+  Future<double> getValue() async {
+    final Database db = await database;
+
+    final List<Map<String, dynamic>> maps = await db.query('items');
+
+    var list = List.generate(maps.length, (i) {
+      return Item(
+          id: maps[i]['id'],
+          name: maps[i]['name'],
+          price: maps[i]['price'],
+          amount: maps[i]['amount']);
+    });
+
+    double values = 0.0;
+
+    list.forEach((element) {
+      values = values + element.price;
+    });
+
+     print(values);
+
+    return values;
   }
 
   Future<void> delete(String id) async {

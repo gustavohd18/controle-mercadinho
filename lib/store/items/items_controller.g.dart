@@ -24,10 +24,26 @@ mixin _$ItemsController on _ItemsControllerBase, Store {
     });
   }
 
+  final _$totalAtom = Atom(name: '_ItemsControllerBase.total');
+
+  @override
+  double get total {
+    _$totalAtom.reportRead();
+    return super.total;
+  }
+
+  @override
+  set total(double value) {
+    _$totalAtom.reportWrite(value, super.total, () {
+      super.total = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
-items: ${items}
+items: ${items},
+total: ${total}
     ''';
   }
 }

@@ -1,9 +1,14 @@
+import 'package:controle_do_mercadinho/service/database.dart';
 import 'package:flutter/material.dart';
 
 class ItemTiles extends StatelessWidget {
   final String id, title, price, qtd;
 
-  ItemTiles(this.id, this.title, this.price, this.qtd);
+  final Function() f;
+
+  ItemTiles(this.id, this.title, this.price, this.qtd, this.f);
+
+  final dbHelper = ItemDatabase.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +18,10 @@ class ItemTiles extends StatelessWidget {
       title: Text(title),
       subtitle: Text("Preço: " + price),
       trailing: Icon(Icons.food_bank_outlined, color: Colors.black),
-      onTap: () {},
+      onTap: () {
+        dbHelper.delete(id.toString());
+        f();
+      },
     )));
   }
 }

@@ -16,16 +16,24 @@ abstract class _ItemsControllerBase with Store {
   @observable
   Future<List<Item>> items;
 
+  @observable
+  double total = 0.0;
+
   void _loadContent() {
     items = dbHelper.getItems();
   }
 
   void reload() async {
     _loadContent();
+    total = await dbHelper.getValue();
   }
 
-   Future<List<Item>> loadingContent() {
-     return dbHelper.getItems();
+  Future<List<Item>> loadingContent() {
+    return dbHelper.getItems();
+  }
+
+  Future<double> loadingValues() {
+    return dbHelper.getValue();
   }
 
   void delete(int id) {

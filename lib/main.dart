@@ -7,7 +7,7 @@ import 'components/custom_dialog.dart';
 import 'components/itemList.dart';
 
 void main() {
-   runApp(ModularApp(
+  runApp(ModularApp(
     module: AppModule(),
   ));
 }
@@ -16,6 +16,8 @@ class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
+
+  double values;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -26,49 +28,48 @@ class _MyHomePageState extends ModularState<MyHomePage, ItemsController> {
   void initState() {
     super.initState();
     this.controller.reload();
+    load();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-
         title: Text("Controle de mercadinho"),
       ),
-      body: Center(
-       
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-        Expanded(
-          child: Observer(
-            builder: (_) => ItemList(
-              this.controller.items,
-              "Sem item"
-      
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+            height: 500,
+            child: Observer(
+              builder: (_) => ItemList(this.controller.items, "Sem item", this.controller.reload),
             ),
           ),
-        ),
-          ],
-        ),
+          Text("Valor da lista: ${widget.values}")
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed:  (){
-                showDialog(context: context,
-                  builder: (BuildContext context){
-                  return CustomDialogBox(
-                    title: "Adicionar item",
-                    descriptions: "Hii all this is a custom dialog in flutter and  you will be use in your flutter applications",
-                    text: "Adicionar",
-                    f: this.controller.reload,
-                  );
-                  }
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return CustomDialogBox(
+                  title: "Adicionar item",
+                  descriptions:
+                      "Hii all this is a custom dialog in flutter and  you will be use in your flutter applications",
+                  text: "Adicionar",
+                  f: this.controller.reload,
                 );
-              },
+              });
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
-      ), 
+      ),
     );
+  }
+
+  void load() async {
+    widget.values = await this.controller.loadingValues();
   }
 }
