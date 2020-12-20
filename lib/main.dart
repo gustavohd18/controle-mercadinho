@@ -46,7 +46,9 @@ class _MyHomePageState extends ModularState<MyHomePage, ItemsController> {
               builder: (_) => ItemList(this.controller.items, "Sem item", this.controller.reload),
             ),
           ),
-          Text("Valor da lista: ${widget.values}")
+           Observer(
+              builder: (_) => Text("Valor da lista: ${this.controller.total}"),
+            ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
