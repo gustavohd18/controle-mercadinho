@@ -59,7 +59,7 @@ class ItemDatabase implements IDatabase {
   Future<List<Item>> getItems() async {
     final Database db = await database;
 
-    final List<Map<String, dynamic>> maps = await db.query('favorites');
+    final List<Map<String, dynamic>> maps = await db.query('items');
 
     return List.generate(maps.length, (i) {
       return Item(

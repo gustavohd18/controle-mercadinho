@@ -1,19 +1,15 @@
-import 'package:controle_do_mercadinho/components/itemTiles.dart';
+import 'package:controle_do_mercadinho/store/items/items_controller.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'app/app_module.dart';
 import 'components/custom_dialog.dart';
+import 'components/itemList.dart';
 
 void main() {
-  runApp(MyApp());
-}
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
-    );
-  }
+   runApp(ModularApp(
+    module: AppModule(),
+  ));
 }
 
 class MyHomePage extends StatefulWidget {
@@ -25,13 +21,11 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+class _MyHomePageState extends ModularState<MyHomePage, ItemsController> {
+  @override
+  void initState() {
+    super.initState();
+    this.controller.reload();
   }
 
   @override
@@ -47,11 +41,15 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-              ItemTiles("1", "arroz", "4.50", "1"),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+        Expanded(
+          child: Observer(
+            builder: (_) => ItemList(
+              this.controller.items,
+              "Sem item"
+      
             ),
+          ),
+        ),
           ],
         ),
       ),
@@ -63,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     title: "Adicionar item",
                     descriptions: "Hii all this is a custom dialog in flutter and  you will be use in your flutter applications",
                     text: "Adicionar",
+                    f: this.controller.reload,
                   );
                   }
                 );

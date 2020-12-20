@@ -12,7 +12,8 @@ class CustomDialogBox extends StatefulWidget {
   final String title, descriptions, text;
   final Image img;
 
-  CustomDialogBox({Key key, this.title, this.descriptions, this.text, this.img})
+  CustomDialogBox(
+      {Key key, this.title, this.descriptions, this.text, this.img, this.f})
       : super(key: key);
 
   final priceController = TextEditingController();
@@ -20,6 +21,8 @@ class CustomDialogBox extends StatefulWidget {
   final titleController = TextEditingController();
 
   final dbHelper = ItemDatabase.instance;
+
+  final Function() f;
 
   @override
   _CustomDialogBoxState createState() => _CustomDialogBoxState();
@@ -118,6 +121,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                           var amount = _currentValue;
                           final _item = Item.origin(id, name, price, amount);
                           widget.dbHelper.insertItem(_item);
+                          widget.f();
                           Navigator.of(context).pop();
                         },
                         child: Text(
