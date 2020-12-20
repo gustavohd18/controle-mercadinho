@@ -19,16 +19,13 @@ class ItemDatabase implements IDatabase {
   static final ItemDatabase instance =
       ItemDatabase._privateConstructor();
 
-  // only have a single app-wide reference to the database
   static Database _database;
   Future<Database> get database async {
     if (_database != null) return _database;
-    // lazily instantiate the db the first time it is accessed
     _database = await _initDatabase();
     return _database;
   }
 
-  // this opens the database (and creates it if it doesn't exist)
   _initDatabase() async {
     final path = join(await getDatabasesPath(), _databaseName);
 
@@ -43,7 +40,7 @@ class ItemDatabase implements IDatabase {
             $columnId INTEGER PRIMARY KEY,
             $columnName TEXT NOT NULL,
             $columnPrice REAL NOT NULL,
-            $columnAmount INTEGER NOT NULL,
+            $columnAmount INTEGER NOT NULL
           )
           ''');
   }
